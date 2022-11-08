@@ -1,0 +1,92 @@
+git remote add origin https://github.com/ccllove/prooject1.git
+git branch -M main
+git push -u origin main
+//
+git remote add origin https://github.com/ccllove/prooject1.git
+git push -u origin master
+---
+检查本地文件状态
+git status -s
+?? README.md
+?? index.js
+红色问号未跟踪
+git add . 
+未跟踪文件添加到暂存区
+---
+在本地进行git提交
+git commit -m "新增了index.js文件"
+---
+以后推送使用 git push
+
+////////////
+本地没有现成的git仓库
+eco "# project 02" >> READM.md   //创建.md文件，写入初始内容为# project 02
+git init  
+git add README.md
+git commit -m "first commit" //初始化本地git仓库，修改文件，提交到本地git
+git remote add origin https://github.com/ccllove/prooject1.git  本地和远程仓库关联，远程命名为origin
+git push -u origin master  //本地到远程推送
+/////////////////
+git branch new_branch //仅创建新的本地分支 
+git checkout main //切换本地分支
+将本地已有的分支(已经存在) 和 远程分支连接
+
+git branch --set-upstream-to=origin/master(远程分支名)  work1(本地分支名)
+
+下面命令作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
+
+git checkout -b dev origin/dev
+
+ git branch -d  分支名称 //删除本地分支名称
+
+
+==================================
+
+三种方法解决 fatal: remote origin already exists.
+
+鸾镜朱颜暗换
+
+于 2021-05-14 16:23:07 发布
+
+2082
+ 收藏 9
+分类专栏： git/vim 文章标签： git github
+版权
+
+git/vim
+专栏收录该内容
+7 篇文章0 订阅
+订阅专栏
+原因
+你已经将一个远程仓库添加并命名为origin了，所以现在你是在尝试将另一个远程仓库添加并命名为origin，显然这是一个错误，一个origin怎么指向两个仓库呢？git显然也不能直接帮你进行”喜新厌旧“直接把以前添加的远程仓库给弃了，所以如果你不需要以前添加的仓库就直接删了（方法一和方法二），如果你还得保留以前添加的远程仓库，那你得换个名字添加远程仓库（方法三）
+
+>>>git remote add origin git@github.com:your_username/your_repository.git
+fatal: remote origin already exists.
+1
+2
+解决
+方法一
+使用set-url修改origin仓库的url
+
+>>>git remote set-url origin git@github.com:your_username/your_repository.git
+1
+方法二
+先将已经添加过的，命名为origin的远程仓库给删了，然后重新添加
+
+>>>git remote rm origin
+>>>git remote add origin git@github.com:your_username/your_repository.git
+1
+2
+方法三
+既然你已经将origin指向了某个远程仓库，那现在你换个名字指向另一个远程仓库就可以了
+
+>>>git remote add origin2 git@github.com:your_username/your_repository.git
+1
+这种方法的话，push的时候就需要
+
+>>>git push origin2 master
+1
+意思是把本地的修改提交到远程仓库origin2的master分支里面去。
+————————————————
+版权声明：本文为CSDN博主「鸾镜朱颜暗换」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_34769162/article/details/116379638
